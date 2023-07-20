@@ -1,0 +1,113 @@
+\documentclass[12pt, oneside, paper=A4, DIV=15, BCOR=0mm, abstract=true, headings=small]{scrartcl}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{colortbl}
+%\usepackage{lmodern}
+%Libertine
+%\usepackage{libertinus}
+%\usepackage{libertinust1math}
+
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+%% \setmainfont[Ligatures=TeX]{Verdana}
+
+\usepackage[headsepline, footsepline]{scrlayer-scrpage}
+\usepackage{sectsty}
+\usepackage{lastpage}
+% Typographie
+\usepackage[auto]{microtype}
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Einbindung von Bildern, Tabellen, pdf-Seiten, Quellcode
+\usepackage{graphicx}
+\usepackage{multirow, multicol, booktabs}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{ltablex}
+\usepackage{subfig}
+\captionsetup[subtable]{position=top}
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{lscape}
+
+
+% Darstellung von URL
+\usepackage{url}
+\usepackage{ulem}
+\urlstyle{same}
+
+% Fussnoten, auch für Tabellen
+\usepackage{footnote}
+\makesavenoteenv{tabular} 
+
+%\renewcommand*{\labelnamepunct}{\addcolon\addspace}
+
+% Speicherort der Literaturangaben (*.bib Datei)
+% \bibliography{biblio/biblio.bib}
+
+
+\deffootnote{1.5em}{1em}{%
+  \makebox[1.5em][l]{\thefootnotemark}%
+}
+
+\interfootnotelinepenalty=10000
+
+
+\addtokomafont{caption}{\small}
+\setkomafont{captionlabel}{\sffamily\bfseries}
+\setkomafont{subject}{\Large\bfseries}
+\setkomafont{author}{\normalfont}
+\setkomafont{date}{\normalfont}
+\setkomafont{publishers}{\normalfont}
+
+
+\makeatletter
+% \renewcommand{\l@section}{\@dottedtocline{1}{0em}{0em}}
+% \renewcommand{\l@subsection}{\@dottedtocline{2}{4ex}{3.6em}}
+% \g@addto@macro{\@afterheading}{\vspace{-0.25\baselineskip}}
+\renewcommand{\l@section}{\@dottedtocline{1}{0ex}{1.8em}}
+\renewcommand{\l@subsection}{\@dottedtocline{2}{1.8em}{2.7em}}
+% \g@addto@macro{\@afterheading}{\vspace{-0.25\baselineskip}}
+\makeatother
+
+
+%\renewcaptionname{ngerman}{\figurename}{Abb.}
+\renewcaptionname{french}{\tablename}{Tableau} 
+
+% Tabellenumgebungen mit Schriftgröße 10 und 7
+\newenvironment{tabular10}{%
+  \fontsize{10}{12}\selectfont\tabular
+}{%
+  \endtabular
+}
+
+\definecolor{bleu}{rgb}{0.12, 0.29, 0.49}
+\definecolor{gris}{rgb}{0.91, 0.91, 0.91}
+
+%% \renewcommand\thesection{\Alph{section}}
+%% \usepackage{titlesec}
+%% \titleformat{\section}{\large\bfseries\textcolor{bleu}}{\thesection}{1em}{}
+
+%% \titleformat{\subsection}{\bfseries\textcolor{bleu}}{\thesubsection}{1em}{}
+
+%% \titleformat{\subsubsection}{\itshape\textcolor{bleu}}{\thesubsubsection}{1em}{}
+
+\usepackage[
+pdftitle={ANR MAESTRIA - avancement},
+pdfsubject={},
+pdfauthor={Clément Mallet},
+pdfkeywords={Earth Observation, Image Analysis, Multi-Modal, Land-cover, Operational}]{hyperref}
+\usepackage[french]{cleveref}
+
+\hypersetup{colorlinks=true,linkcolor=bleu}
+
+\newcommand{\todo}[1]{{\color{red} TODO: {#1}}}
+\newcommand{\ANRinfo}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\clement}[1]{clement: \textcolor{green}{#1}}
+\renewcommand{\thesection}{\Alph{section}}

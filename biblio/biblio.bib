@@ -1,0 +1,235 @@
+% Encoding: UTF-8
+@article{bouveyron-2009-robus-super,
+  author       = {Charles Bouveyron and St{\'e}phane Girard},
+  title	       = {Robust Supervised Classification With Mixture Models: Learning From Data With Uncertain Labels},
+  journal      = {Pattern Recognition},
+  volume       = 42,
+  number       = 11,
+  pages	       = {2649-2658},
+  year	       = 2009,
+  doi	       = {10.1016/j.patcog.2009.03.027},
+  url	       = {https://doi.org/10.1016/j.patcog.2009.03.027},
+  DATE_ADDED   = {Tue Sep 25 14:30:18 2018},
+}
+
+@article{boyd-2010-distr-optim,
+  author       = {Stephen Boyd},
+  title	       = {Distributed Optimization and Statistical Learning Via the Alternating Direction Method of Multipliers},
+  journal      = {Foundations and Trends® in Machine Learning},
+  volume       = 3,
+  number       = 1,
+  pages	       = {1-122},
+  year	       = 2010,
+  doi	       = {10.1561/2200000016},
+  url	       = {https://doi.org/10.1561/2200000016},
+  DATE_ADDED   = {Thu Oct 4 14:55:37 2018},
+}
+
+@Article{isprs-archives-XLIII-B2-2020-703-2020,
+AUTHOR = {Mallet, C. and Le~Bris, A.},
+TITLE = {CURRENT CHALLENGES IN OPERATIONAL VERY HIGH RESOLUTION LAND-COVER MAPPING},
+JOURNAL = {ISPRS - International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences},
+VOLUME = {XLIII-B2-2020},
+YEAR = {2020},
+PAGES = {703--710},
+URL = {https://www.int-arch-photogramm-remote-sens-spatial-inf-sci.net/XLIII-B2-2020/703/2020/},
+DOI = {10.5194/isprs-archives-XLIII-B2-2020-703-2020}
+}
+
+@Article{Luc_RS,
+AUTHOR={Baudoux, L. and Inglada, J. and Mallet, C.},
+TITLE={Land-cover map translation without an image},
+JOURNAL={Submitted to Remote Sensing},
+YEAR={2020}
+}
+
+
+@article{zhao17_infov,
+  author =       {Zhao, Shengjia and Song, Jiaming and Ermon, Stefano},
+  title =        {Infovae: Information Maximizing Variational Autoencoders},
+  journal =      {CoRR},
+  year =         2017,
+  url =          {http://arxiv.org/abs/1706.02262v3},
+  abstract =     {A key advance in learning generative models is the use of
+                  amortized inference distributions that are jointly trained
+                  with the models. We find that existing training objectives for
+                  variational autoencoders can lead to inaccurate amortized
+                  inference distributions and, in some cases, improving the
+                  objective provably degrades the inference quality. In
+                  addition, it has been observed that variational autoencoders
+                  tend to ignore the latent variables when combined with a
+                  decoding distribution that is too flexible. We again identify
+                  the cause in existing training criteria and propose a new
+                  class of objectives (InfoVAE) that mitigate these problems. We
+                  show that our model can significantly improve the quality of
+                  the variational posterior and can make effective use of the
+                  latent features regardless of the flexibility of the decoding
+                  distribution. Through extensive qualitative and quantitative
+                  analyses, we demonstrate that our models outperform competing
+                  approaches on multiple performance metrics.},
+  archivePrefix ={arXiv},
+  eprint =       {1706.02262},
+  primaryClass = {cs.LG},
+}
+
+@InProceedings{hjelm18_learn_deep_repres_by_mutual,
+  author =       {Hjelm, R Devon and Fedorov, Alex and
+                  Lavoie-Marchildon, Samuel and Grewal, Karan and
+                  Bachman, Phil and Trischler, Adam and Bengio,
+                  Yoshua},
+  title =        {Learning Deep Representations By Mutual Information
+                  Estimation and Maximization},
+  booktitle =      {ICLR},
+  year =         2019,
+  url =          {http://arxiv.org/abs/1808.06670v5} 
+}
+
+@article{burgess18_under_disen_vae,
+  author =       {Burgess, Christopher P. and Higgins, Irina and Pal,
+                  Arka and Matthey, Loic and Watters, Nick and
+                  Desjardins, Guillaume and Lerchner, Alexander},
+  title =        {Understanding Disentangling in {$\beta$}-{VAE}},
+  journal =      {CoRR},
+  year =         2018,
+  url =          {http://arxiv.org/abs/1804.03599v1},
+  abstract =     {We present new intuitions and theoretical assessments
+                  of the emergence of disentangled representation in
+                  variational autoencoders. Taking a rate-distortion
+                  theory perspective, we show the circumstances under
+                  which representations aligned with the underlying
+                  generative factors of variation of data emerge when
+                  optimising the modified ELBO bound in $\beta$-VAE, as
+                  training progresses. From these insights, we propose a
+                  modification to the training regime of $\beta$-VAE,
+                  that progressively increases the information capacity
+                  of the latent code during training. This modification
+                  facilitates the robust learning of disentangled
+                  representations in $\beta$-VAE, without the previous
+                  trade-off in reconstruction accuracy.},
+  archivePrefix ={arXiv},
+  eprint =       {1804.03599},
+  primaryClass = {stat.ML},
+}
+
+@InProceedings{grover19_uncer_autoen,
+  author =       {Grover, Aditya and Ermon, Stefano},
+  title =        {Uncertainty Autoencoders: Learning Compressed Representations
+                  via Variational Information Maximization},
+  booktitle =    {Proceedings of Machine Learning Research},
+  year =         2019,
+  volume =       89,
+  pages =        {2514--2524},
+  url =          {http://proceedings.mlr.press/v89/grover19a.html},
+  abstract =     {Compressed sensing techniques enable efficient acquisition and
+                  recovery of sparse, highdimensional data signals via
+                  low-dimensional projections. In this work, we propose
+                  Uncertainty Autoencoders, a learning framework for
+                  unsupervised representation learning inspired by compressed
+                  sensing. We treat the low-dimensional projections as noisy
+                  latent representations of an autoencoder and directly learn
+                  both the acquisition (i.e., encoding) and amortized recovery
+                  (i.e., decoding) procedures. Our learning objective optimizes
+                  for a tractable variational lower bound to the mutual
+                  information between the datapoints and the latent
+                  representations. We show how our framework provides a unified
+                  treatment to several lines of research in dimensionality
+                  reduction, compressed sensing, and generative modeling.
+                  Empirically, we demonstrate a 32 \% improvement on average
+                  over competing approaches for the task of statistical
+                  compressed sensing of high-dimensional datasets.},
+  editor =       {Chaudhuri, Kamalika and Sugiyama, Masashi},
+  series =       {Proceedings of Machine Learning Research},
+}
+
+@article{doersch16_tutor_variat_autoen,
+  author =       {Doersch, Carl},
+  title =        {Tutorial on Variational Autoencoders},
+  journal =      {CoRR},
+  year =         2016,
+  url =          {http://arxiv.org/abs/1606.05908v2},
+  abstract =     {In just three years, Variational Autoencoders (VAEs)
+                  have emerged as one of the most popular approaches
+                  to unsupervised learning of complicated
+                  distributions. VAEs are appealing because they are
+                  built on top of standard function approximators
+                  (neural networks), and can be trained with
+                  stochastic gradient descent. VAEs have already shown
+                  promise in generating many kinds of complicated
+                  data, including handwritten digits, faces, house
+                  numbers, CIFAR images, physical models of scenes,
+                  segmentation, and predicting the future from static
+                  images. This tutorial introduces the intuitions
+                  behind VAEs, explains the mathematics behind them,
+                  and describes some empirical behavior. No prior
+                  knowledge of variational Bayesian methods is
+                  assumed.},
+  archivePrefix ={arXiv},
+  eprint =       {1606.05908},
+  primaryClass = {stat.ML},
+}
+
+@article{garnot20_light_tempor_self_atten_class,
+  author =       {Garnot, Vivien Sainte Fare and Landrieu, Loic},
+  title =        {Lightweight Temporal Self-Attention for Classifying
+                  Satellite Image Time Series},
+  journal =      {CoRR},
+  year =         2020,
+  url =          {http://arxiv.org/abs/2007.00586v3},
+  abstract =     {The increasing accessibility and precision of Earth
+                  observation satellite data offers considerable
+                  opportunities for industrial and state actors alike.
+                  This calls however for efficient methods able to
+                  process time-series on a global scale. Building on
+                  recent work employing multi-headed self-attention
+                  mechanisms to classify remote sensing time sequences,
+                  we propose a modification of the Temporal Attention
+                  Encoder. In our network, the channels of the temporal
+                  inputs are distributed among several compact attention
+                  heads operating in parallel. Each head extracts
+                  highly-specialized temporal features which are in turn
+                  concatenated into a single representation. Our
+                  approach outperforms other state-of-the-art time
+                  series classification algorithms on an open-access
+                  satellite image dataset, while using significantly
+                  fewer parameters and with a reduced computational
+                  complexity.},
+  archivePrefix ={arXiv},
+  eprint =       {2007.00586},
+  primaryClass = {cs.CV},
+}
+
+
+
+
+@InProceedings{deconv_net,
+  author    = {Hyeonwoo Noh and
+               Seunghoon Hong and
+               Bohyung Han},
+  title     = {Learning Deconvolution Network for Semantic Segmentation},
+  booktitle   = {ICCV},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1505.04366}
+}
+
+
+@InProceedings{U_NET,
+  author    = {Olaf Ronneberger and
+               Philipp Fischer and
+               Thomas Brox},
+  title     = {U-Net: Convolutional Networks for Biomedical Image Segmentation},
+  booktitle   = {MICCAI},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1505.04597}
+}
+
+
+@Article{Stocker2020,
+AUTHOR = {Stocker, O. and Le Bris, A.},
+TITLE = {CAN {SPOT}-6/7 {CNN} SEMANTIC SEGMENTATION IMPROVE {S}ENTINEL-2 BASED LAND COVER PRODUCTS? SENSOR ASSESSMENT AND FUSION},
+JOURNAL = {ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences},
+VOLUME = {V-2-2020},
+YEAR = {2020},
+PAGES = {557--564},
+URL = {https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/V-2-2020/557/2020/},
+DOI = {10.5194/isprs-annals-V-2-2020-557-2020}
+}
