@@ -10,19 +10,20 @@
 %\usepackage{libertinust1math}
 
 \usepackage[T1]{fontenc}
-\usepackage{fontspec}
+%\usepackage{fontspec}
 %% \setmainfont[Ligatures=TeX]{Verdana}
+
 
 \usepackage[headsepline, footsepline]{scrlayer-scrpage}
 \usepackage{sectsty}
 \usepackage{lastpage}
 % Typographie
-\usepackage[auto]{microtype}
-\clubpenalty = 10000
-\widowpenalty = 10000
-\displaywidowpenalty = 10000
 
-% Einbindung von Bildern, Tabellen, pdf-Seiten, Quellcode
+%\usepackage[auto]{microtype}
+%\clubpenalty = 10000
+%\widowpenalty = 10000
+%\displaywidowpenalty = 10000
+
 \usepackage{graphicx}
 \usepackage{multirow, multicol, booktabs}
 \usepackage{amsmath,amssymb,amsthm}
@@ -35,9 +36,9 @@
 \usepackage{pdfpages}
 \usepackage{listings}
 \usepackage{lscape}
+\usepackage{filecontents}
+\usepackage{biblatex}
 
-
-% Darstellung von URL
 \usepackage{url}
 \usepackage{ulem}
 \urlstyle{same}
@@ -47,9 +48,6 @@
 \makesavenoteenv{tabular} 
 
 %\renewcommand*{\labelnamepunct}{\addcolon\addspace}
-
-% Speicherort der Literaturangaben (*.bib Datei)
-% \bibliography{biblio/biblio.bib}
 
 
 \deffootnote{1.5em}{1em}{%
@@ -103,7 +101,7 @@ pdftitle={ANR MAESTRIA - avancement},
 pdfsubject={},
 pdfauthor={Clément Mallet},
 pdfkeywords={Earth Observation, Image Analysis, Multi-Modal, Land-cover, Operational}]{hyperref}
-\usepackage[french]{cleveref}
+%\usepackage[french]{cleveref}
 
 \hypersetup{colorlinks=true,linkcolor=bleu}
 
@@ -111,3 +109,6 @@ pdfkeywords={Earth Observation, Image Analysis, Multi-Modal, Land-cover, Operati
 \newcommand{\ANRinfo}[1]{\textcolor{blue}{\textit{#1}}}
 \newcommand{\clement}[1]{clement: \textcolor{green}{#1}}
 \renewcommand{\thesection}{\Alph{section}}
+
+
+
