@@ -18,13 +18,13 @@ En outre, la taille des données de référence est généralement faible pour c
 
 \end{itemize}
 
-\subsubsection*{Résultats majeurs du projet (environ 600 caractères espaces compris)}
+\subsubsection*{Résultats majeurs du projet}
 
 Les contributions majeures du projet sont doubles. Il s’agit d’une part d’une panoplie d’outils ouverts, qui facilitent la fusion et la classification multimodales d’images d’observation de la Terre puis la génération de cartes d’occupation des sols (OCS) à échelle nationale. Les problématiques de passage à l’échelle et de gestion d’images satellites multiples pour l’OCS étaient auparavant plutôt antagonistes, marquant une séparation assez nette entre une recherche opérationnelle à large échelle mais mono-capteur à une recherche plus expérimentale, plus riches en capteurs et en classes, mais non reproductible nationalement. MAESTRIA a porté la réconciliation de ces ambitions qui sont désormais nativement couplées dans beaucoup de chaînes développées et/ou opérées par des agences cartographiques ou des instituts de recherche thématiques.\\
 D’autre part, le projet a participé aux évolutions de la chaîne $\iota^2$ et à son renforcement comme chaîne incontournable pour le traitement massif d’images d’OT et, entre autres, de classification d’occupation des sols dans plusieurs organismes et instituts de recherche en France.
 
 
-\subsubsection*{Production scientifique et brevets depuis le début du projet}
+\subsubsection*{Production scientifique}
 La production scientifique s’est appuyée sur 3 thèses (dont une interrompue à mi-parcours et une non finalisée) et un ingénieur qui ont débouché, d’une part,  sur une dizaine de publications scientifiques dans des revues et conférences internationales et, d’autre part, sur des dépôts de codes et de donnés intégralement en open-source. Les développements principaux de MAESTRIA sont devenus, comme le voulait l’ambition initiale du projet, des évolutions de la chaîne \href{https://framagit.org/iota2-project/iota2}{$\iota^2$}, sur une forge publique.
 
 \subsubsection*{Informations factuelles}
@@ -49,3 +49,25 @@ Le projet ANR MAESTRIA est un projet de recherche fondamentale coordonné par Cl
 The MAESTRIA project aims to solve methodological challenges related to the automatic analysis of a very large amount of images acquired by Earth Observation (EO) platforms. More specifically, MAESTRIA aims to generate national-scale land-cover and land-use maps, at multiple spatial and semantic resolutions, from multi-modal and multi-temporal satellite images. The ultimate aim is to provide a wide range of land-cover/land-use products that can be exploited at both local and national scales, and for both public policy needs and scientific modelling (e.g., climate, urban planning, crop monitoring, change detection and monitoring). The aim of MAESTRIA is therefore to develop methods that leverage
 current challenges in multisource Earth Observation image analysis
  to produce land-cover/land-use maps at very large spatial scales and with highly variable spatial resolutions. The MAESTRIA project is grounded on an open and reproducible research policy: source codes and generated maps are made freely available.
+
+ \subsubsection*{Main challenges}
+ The underlying process is a supervised classification in a high-dimensional space. Each pixel must be assigned a label from a given set of classes, using (i) features extracted from all available Earth Observation images of a given area and (ii) a classifier trained with data presenting heterogeneous semantic and spatial accuracies. The challenges addressed were: 
+
+\begin{itemize}
+\item \textit{How to combine very high spatial resolution images with high resolution optical and radar time series of images ?} This required the development of specific methods for large-scale Earth Observation data, in order to leverage (i) the complementary information provided by radar and optical sensors, at different spatial scales, and to handle (ii) such a large amount of images on a large spatial scale.
+\item \textit{How to learn with noisy big data ?} The learning method has to cope with noisy information in the image data as well as in the training and ground truth data. Furthermore, the size of the reference data is usually small for some particular classes, resulting in a reference data badly balanced in terms of number of samples per classes. Addressing such a problem targetted to reduce the dependence on available training data, whose quality and accessibility may vary from one geographical place to another.
+\item \textit{How to derive products semantically consistent at many spatial scales?} The solutions designed to solve the above-mentioned challenges should lead to versatile tools to generate multiple, coherent LULC products on a national scale. Efforts were also required to derive maps with a given spatial and semantic scale from these raw classifications, without resorting to costly new pixel-based classification(s).
+
+\end{itemize}
+
+\subsubsection*{Main results}
+
+The main contributions are twofold. On the one hand, we developed a set of open tools that facilitate the multimodal fusion and classification of Earth Observation images, but also the generation of LULC maps on a national scale. The issues of scaling up and managing numerous satellite images for LULC were previously rather antagonistic, with a clear separation between large-scale, single-sensor operational research and more experimental research, with more sensors and fine-grained classes, but without national scaling-up ability. MAESTRIA has reconciled these ambitions, which are now natively coupled in many of the workflows developed and/or operated by mapping agencies or thematic research institutes.
+The project also contributed to the development of the $\iota^2$ chain and its reinforcement as an pivotal tool for the massive processing of EO images and, among other things, LCLU classification in several French research institutes and organizations.
+
+
+\subsubsection*{Scientific production}
+The project was grounded on 3 PhD theses (one was interrupted after 1 year, and another one was never finalized) and an engineer, resulting in a dozen scientific publications in international journals and conferences, as well as code and data repositories, all of which are open-source. In line with the project's initial ambition, MAESTRIA's main developments participated to the  evolutions of the \href{https://framagit.org/iota2-project/iota2}{$\iota^2$} chain, on a public forge.
+
+\subsubsection*{Key factual information}
+The ANR MAESTRIA project is a fundamental research project coordinated by Clément Mallet (LASTIG) jointly with CESBIO. The project began in October 2019 and lasted 54 months. It received an ANR funding of €568$:$k€ for an overall cost of around €420$:$k€. In addition, itt received support from the Aerospace Valley competitiveness cluster.
