@@ -45,15 +45,15 @@ L’entraînement du modèle se fait par optimisation d’une fonction de coût 
 \item 1 terme de divergence entre les espaces latents générés par les 2 encodeurs pour une paire de données S1 et S2.
 \end{itemize}
 
-Les erreurs de réconstruction sont mesurées par une log-vraisemblance gaussienne et la divergence entre les espaces latents est mesurée avec la divergence de Kullback-Leibler entre les distributions (gausiennes) inférées par les encodeurs. On se rapproche ainsi du ELBO classique dans les VAE adapté pour le cas multi-modal et où l’espace latent de chaque modalité agit en tant que prior de la modalité complémentaire.
+Les erreurs de réconstruction sont mesurées par une log-vraisemblance gaussienne et la divergence entre les espaces latents est mesurée avec la divergence de Kullback-Leibler entre les distributions (gaussiennes) inférées par les encodeurs. On se rapproche ainsi du ELBO classique dans les VAE adapté pour le cas multi-modal et où l’espace latent de chaque modalité agit en tant que prior de la modalité complémentaire.
 
-Il est intéressant de noter la donnée S1 est composée des orbites ascendante et descendante de la même date (à 12h d’écart). Dans le cas où une seule orbite serait disponible (hors Europe, le plan d’acquisition de S1 ne garantit pas la présence des 2 images) la donnée est mise à zéro en utilisant la stratégie de modality dropout \cite{neverova-2016-moddr}.
+Il est intéressant de noter la donnée S1 est composée des orbites ascendante et descendante de la même date (à 12h d’écart). Dans le cas où une seule orbite serait disponible (hors Europe, le plan d’acquisition de S1 ne garantit pas la présence des 2 images) la donnée est mise à zéro en utilisant la stratégie de \textit{modality dropout} \cite{neverova-2016-moddr}.
 
-Les données satellite sont constituées des mesures (bandes spectrales optiques et polarisations SAR), mais aussi des informations de géométrie d’acquisition (angles capteur et solaires en optique et angle d’incidence locale en SAR). Ces données sont complétées par des informations de topographie (altitude, pente et aspect issus du modèle numérique de terrain SRTM) et des variables climatiques de la base de données Worldclim 2 \cite{fick17_world}.
+Les données satellite sont constituées des mesures (bandes spectrales optiques et polarisations SAR), mais aussi des informations de géométrie d’acquisition (angles capteur et solaires en optique et angle d’incidence locale en SAR). Ces données sont complétées par des informations de topographie (altitude, pente et aspect issus du modèle numérique de terrain SRTM) et des variables climatiques de la base de données Worldclim2 \cite{fick17_world}.
 
-\paragraph{Préparartion de jeux de données multimodaux de pré-entraînement}
+\paragraph{Préparation de jeux de données multimodaux de pré-entraînement}
 
-L’entraînement de modèles de fondation du type MMDC nécessite des gros volumes de données. Nous avons constitué un jeu de données dont le volume dépasse les 2TB. Il est composé de toutes les données disponibles sur l’année 2018 pour les capteurs Sentinel-1 et Sentinel-2 sur 50 tuiles de la grille MGRS sélectionnées de façon aléatoire sur l’ensemble des surfaces continentales de façon à couvrir des zones climatiques et des paysages différents. Elles sont illustrées sur la figure \ref{fig:mmdctiles}. Sur chacune de ces tuiles, 5 régions d’intérêt (ROI) de 1024 $\times$ 1024 pixels (à 10 m. de résolution spatiale) sont découpées de façon aléatoire. Toute la profondeur temporelle est conservée. Chaque ROI est accompagnée des 103 variables climatiques Worldclim2 et du MNT SRTM. Le code source utilisé pour la constitution du jeu de données est disponible \href{https://src.koda.cnrs.fr/mmdc/mmdc-datacollection}{en ligne}.
+L’entraînement de modèles de fondation du type MMDC nécessite des gros volumes de données. Nous avons constitué un jeu de données dont le volume dépasse les 2TB. Il est composé de toutes les données disponibles sur l’année 2018 pour les capteurs Sentinel-1 et Sentinel-2 sur 50 tuiles de la grille MGRS sélectionnées de façon aléatoire sur l’ensemble des surfaces continentales de façon à couvrir des zones climatiques et des paysages différents. Elles sont illustrées sur la figure \ref{fig:mmdctiles}. Sur chacune de ces tuiles, 5 régions d’intérêt (ROI) de 1024 $\times$ 1024 pixels (à 10$\:$m. de résolution spatiale) sont découpées de façon aléatoire. Toute la profondeur temporelle est conservée. Chaque ROI est accompagnée des 103 variables climatiques Worldclim2 et du Modèle Numérique de Terrain (MNT) SRTM. Le code source utilisé pour la constitution du jeu de données est disponible \href{https://src.koda.cnrs.fr/mmdc/mmdc-datacollection}{en ligne}.
 
 
 \begin{figure}
@@ -71,16 +71,16 @@ L’ensemble du code dévelopé dans le cadre du WP1 est disponible en ligne sur
 
 Le code a été décomposé en plusieurs dépôts, dont \href{https://src.koda.cnrs.fr/mmdc/mmdc-singledate}{le principal} contient les modèles de réseaux de neurones.
 
-Nous avons aussi réalisé le portage en Pytorch du modèle de transfert radiatif PROSAIL \cite{jacquemoud-2009-prosp-sail-model} à partir de sa version Numpy \cite{domenzain19}. Ceci a été nécessaire pour pouvoir insérer le modèle physique dans les modèles d’apprentissage profond. En effet, pour réaliser l’apprentissage de bout en bout, il est nécessaire de rétro-propager les gradients des fonctions de coût à travers toutes les opérations du modèle (encodeurs et décodeurs). Dans le cas de l’apprentissage avec priors physiques, le décodeur est remplacé par le modèle physique, qui doit être différentiable et capable de propager les gradients.
+Nous avons aussi réalisé le portage en Pytorch du modèle de transfert radiatif PROSAIL \cite{jacquemoud-2009-prosp-sail-model} à partir de sa version Numpy \cite{domenzain19}. Ceci a été nécessaire pour pouvoir insérer le modèle physique dans les modèles d’apprentissage profond. En effet, pour réaliser l’apprentissage de bout en bout, il est nécessaire de rétro-propager les gradients des fonctions de coût à travers toutes les opérations du modèle (encodeurs et décodeurs). Dans le cas de l’apprentissage avec a priori physiques, le décodeur est remplacé par le modèle physique, qui doit être différentiable et capable de propager les gradients.
 
 \paragraph{Intégration dans $\iota^2$}
-Afin de pouvoir déployer les modèles MMDC sur de grandes étendues, MAESTRIA a proposé de faire des évolutions à la chaîne $\iota^2$ dévelopée initialement par le CESBIO. L’idée principale a était d’utiliser les encodeurs MMDC comme extracteurs de primitives qui pourraient être insérés dans le workflow $\iota^2$ (extraction de primitives, apprentissage, inférence). $\iota^2$ étant un projet existant avec des pratiques de développement ouvertes \href{https://framagit.org/iota2-project/iota2}{sur une forge publique}, les développements nécessaires à MAESTRIA ont été découpés en tickets spécifiques :
+Afin de pouvoir déployer les modèles MMDC sur de grandes étendues, MAESTRIA a proposé de faire des évolutions à la chaîne $\iota^2$ développée initialement par le CESBIO. L’idée principale a était d’utiliser les encodeurs MMDC comme extracteurs de primitives qui pourraient être insérés dans le workflow $\iota^2$ (extraction de primitives, apprentissage, inférence). $\iota^2$ étant un projet existant avec des pratiques de développement ouvertes \href{https://framagit.org/iota2-project/iota2}{sur une forge publique}, les développements nécessaires à MAESTRIA ont été découpés en tickets spécifiques :
 \begin{itemize}
 \item création de data-loaders pour entraîner des modèles de réseaux de neurones dans $\iota^2$ (\href{https://framagit.org/iota2-project/iota2/-/issues/194}{ticket 194});
 \item prise en compte de l’échantillonnage irrégulier dans les séries temporelles (\href{https://framagit.org/iota2-project/iota2/-/issues/318}{ticket 318});
 \item prise en compte d’échantillons sous forme de patchs pour les CNN (\href{https://framagit.org/iota2-project/iota2/-/issues/334}{ticket 334});
 \item calcul de statistiques et standardisation des données dans les data-loaders (\href{https://framagit.org/iota2-project/iota2/-/issues/418}{ticket 418});
-\item profilage et opitimisation des fonctinnalités d’apprentissage profond (\href{https://framagit.org/iota2-project/iota2/-/issues/579}{ticket 579}).
+\item profilage et optimisation des fonctionnalités d’apprentissage profond (\href{https://framagit.org/iota2-project/iota2/-/issues/579}{ticket 579}).
   
 \end{itemize}
 
@@ -99,29 +99,29 @@ En utilisant le modèle \emph{robust mixture discriminant analysis} (RMDA) de~\c
   \label{eq:ll}
   \begin{array}{rl}
     \displaystyle{\min_{\mathbf{R}}}
-   &\displaystyle{\sum_{\ell=1}^n -\ln\big(\boldsymbol{\beta}_\ell^\top\mathbf{R}\boldsymbol{\psi}_\ell\big)}\\
+   &\displaystyle{\sum_{\ell=1}^n -\ln\big(\boldsymbol{\beta}_\ell^\top\mathbf{R}\boldsymbol{\psi}_\ell\big)},\\
    \text{Constraint to} & \mathbf{R}^\top\mathbf{1}_C = \mathbf{1}_K,\\
   & \mathbf{R} \succcurlyeq 0,
   \end{array}
 \end{eqnarray}
 où \(\boldsymbol{\psi}_\ell\) est le vecteur d'appartenance au \(K\) clusters du pixel \(\ell\), \(\boldsymbol{\beta}_\ell\) est le vecteur \emph{one-hot-encoded} d'appartenance à la classe du pixel \(\ell\) (\(\beta_{\ell i}=1\) si \(i=c_\ell\), sinon \(\beta_{\ell i}=0\)),  \(\mathbf{R}\in\mathbb{R}^{k\times K}\) la matrice des probabilités \(r_{ij}\), \(\succcurlyeq\) dénote la contrainte de non-négativité élément par élément de \(\mathbf{R}\) et \(\mathbf{1}_k\in\mathbb{R}^k\) un vecteur contenant la valeur 1.
 
-Nous avons montré dans un premier temps que ce problème était un problème d'optimisation convexe, en calculant la matrice hessienne de~(\ref{eq:ll}) et en observant qu'elle était définie semi-positive~\citep[Section~3.1]{GIRYFOUQUET2021320}.
+Nous avons montré dans un premier temps que ce problème était un problème d'optimisation convexe, en calculant la matrice Hessienne de~(\ref{eq:ll}) et en observant qu'elle était définie semi-positive~\citep[Section~3.1]{GIRYFOUQUET2021320}.
 
-A partir de là, nous avons transformer ce problème d'optimisation en un problème d'optimisation par consensus en découplant le problème en sous-problèmes plus simples à résoudre et en définissant une variable globale sur laquelle la contrainte du simplex était imposée:
+A partir de là, nous avons transformer ce problème d'optimisation en un problème d'optimisation par consensus en découplant le problème en sous-problèmes plus simples à résoudre et en définissant une variable globale sur laquelle la contrainte du simplexe était imposée:
 
 \begin{eqnarray}
   \label{eq:consensus}
    \begin{array}{rl}
-     \displaystyle{\min_{\mathbf{R}_\ell,\mathbf{Z}}} & \displaystyle{\sum_{\ell = 1}^{n}f_\ell(\mathbf{R}_\ell)} + g(\mathbf{Z})\\
+     \displaystyle{\min_{\mathbf{R}_\ell,\mathbf{Z}}} & \displaystyle{\sum_{\ell = 1}^{n}f_\ell(\mathbf{R}_\ell)} + g(\mathbf{Z}),\\
      \text{Constraint to} & \mathbf{R}_\ell - \mathbf{Z} = \mathbf{0}\ \forall \ell\in\{1,\ldots,\ n\},
    \end{array}
 \end{eqnarray}
-où \(f_\ell(\mathbf{R}_\ell)  = -\ln(\boldsymbol{\beta}_\ell^\top\mathbf{R}_\ell\boldsymbol{\psi}_\ell)_{+}\) pour \(\ell\in \{1,\ldots,n\}\), \((\cdot)_{+}=\max(0, \cdot)\) et \(g(\mathbf{Z})\) est définie comme la fonction indicatrice sur le simplex \(\mathcal{S}\):
+où \(f_\ell(\mathbf{R}_\ell)  = -\ln(\boldsymbol{\beta}_\ell^\top\mathbf{R}_\ell\boldsymbol{\psi}_\ell)_{+}\) pour \(\ell\in \{1,\ldots,n\}\), \((\cdot)_{+}=\max(0, \cdot)\) et \(g(\mathbf{Z})\) est définie comme la fonction indicatrice sur le simplexe \(\mathcal{S}\):
 \begin{eqnarray}
   g(\mathbf{Z})  =  \left\{
                       \begin{array}{rl}
-                        0 & \text{ if } \mathbf{Z}\in\mathcal{S} = \{\mathbf{Z}|\mathbf{Z}\succcurlyeq 0, \mathbf{Z}^\top\mathbf{1}_C = \mathbf{1}_{K}\} \\
+                        0 & \text{ si } \mathbf{Z}\in\mathcal{S} = \{\mathbf{Z}|\mathbf{Z}\succcurlyeq 0, \mathbf{Z}^\top\mathbf{1}_C = \mathbf{1}_{K}\}, \\
                         +\infty & \text{ sinon.} 
                       \end{array}
                                   \right.                                  \label{eq:simplex}
