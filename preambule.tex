@@ -8,6 +8,7 @@
 %Libertine
 %\usepackage{libertinus}
 %\usepackage{libertinust1math}
+\usepackage[tt=false]{libertine}
 
 \usepackage[T1]{fontenc}
 %\usepackage{fontspec}
@@ -37,11 +38,11 @@
 \usepackage{listings}
 \usepackage{lscape}
 \usepackage{filecontents}
-\usepackage[natbib,style=numeric,defernumbers]{biblatex}
+\usepackage[natbib,defernumbers, backend=biber]{biblatex}
 \addbibresource{biblio.bib}
 
 \usepackage{url}
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
 \urlstyle{same}
 
 % Fussnoten, auch für Tabellen
@@ -109,6 +110,7 @@ pdfkeywords={Earth Observation, Image Analysis, Multi-Modal, Land-cover, Operati
 \newcommand{\todo}[1]{{\color{red} TODO: {#1}}}
 \newcommand{\ANRinfo}[1]{\textcolor{blue}{\textit{#1}}}
 \newcommand{\clement}[1]{clement: \textcolor{green}{#1}}
+\newcommand{\mathieu}[1]{mathieu: \textcolor{magenta}{#1}}
 \newcommand{\jordi}[1]{jordi: \textcolor{red}{#1}}
 \renewcommand{\thesection}{\Alph{section}}
 
