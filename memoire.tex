@@ -12,22 +12,52 @@
 
 \subsection{Résumé du mémoire}
 
+Le projet MAESTRIA avait l'ambition de développer des méthodes automatiques pour l'analyse de la grande quantité d'images satellites hétérogènes d'observation de la Terre disponibles. Il présentait deux objectifs stratégiques principaux :
+\paragraph{D'un point de vue méthodologique,} il visait à intégrer les informations extraites de toutes les sources de données disponibles (à la fois les images satellites et les cartes d'occupation du sol existantes), afin d'atténuer les limitations actuelles. En pratique, on visait à améliorer à la fois la précision sémantique et spatiale des cartes d'occupation des sols (OCS) actuelles
+(10$\:$m$\rightarrow$ 2-5$\:$m, répondant à la plupart des besoins de suivis environnementaux). En particulier, on comptait aboutir à  une carte OCS générique complète de la France avec une qualité homogène (pour toutes les classes d'intérêt), à différentes périodes de l'année, sans se fonder sur des données de référence récentes. Cela passait par de nouvelles méthodes de fusion d'images multi-sources et multi-échelles. Les énormes quantités de données disponibles devaient être fusionnées de manière parcimonieuse afin d'en tirer les informations pertinentes pour les étapes suivantes de classification pixellaire, en trouvant un compromis entre la précision des résultats de classification et passage à l'échelle des méthodes. Cette étape était vue comme cruciale pour gagner en flexibilité et dériver une plus grande gamme de produits OCS pertinents par la suite.
+
+\paragraph{Dans un esprit applicatif,} MAESTRIA visait à étendre les produits OCS classiques et rigides à une variété plus grande (cartographie de l'utilisation des sols, dérivation de produits à grande échelle, cohérents avec les systèmes continentaux existants) \ldots. Cela soulevait des questions méthodologiques fondamentales afin de répondre aux exigences des différents utilisateurs finaux identifiés à des échelles locale, régionale et nationale. On estimait également important de dériver, à partir de ces couches "centrales", plusieurs sous-produits sur une large gamme de résolutions spatiales (2$\rightarrow$100$\:$m). On souhaitait enfin impliquer des utilisateurs finaux, liés à la surveillance de l'environnement, à l'estimation des ressources naturelles ou à la modélisation du climat, pour obtenir des spécifications particulières de produits OCS à façon.
+
 \subsection{Enjeux et problématique, état de l’art}
-\ANRinfo{Présenter les enjeux initiaux du projet, la problématique formulée par le projet, et l’état de l’art sur lequel il s’appuie. Présenter leurs éventuelles évolutions pendant la durée du projet (les apports propres au projet sont présentés en C.4).}
+
+\paragraph{Situation en 2018.} Au cours des quinze dernières années, de plus en plus d'initiatives avaient été prises pour la surveillance de l'état et du changement de la couverture terrestre. Il existait en 2018 des bases de données OCS, à différentes échelles spatiales, correspondant à divers besoins des politiques. En général, plus la résolution spatiale est fine, plus l'ensemble des classes est important. Les produits à l'échelle mondiale/continentale ont une précision spatiale limitée (>30$\:$m) mais avec peu de détails thématiques. Ils étaient produits avec des outils de classification automatique à partir d'une ou deux sources de données de télédétection. Un important travail de correction manuelle explique le délai important entre deux dates (>5$\:$ans). Les bases de données nationales sur l'occupation du sol offraient l'avantage d'une meilleure homogénéité et d'une précision spatiale et sémantique améliorées, puisqu'elles sont générées par des organismes faisant autorité. Cependant, elles étaient rarement produites à l'aide d'outils de classification automatique, et la plupart du temps,
+avec une seule source de données . Le changement de nomenclature et la mise à jour rapide n'étaient pas possibles et réduisaient drastiquement leur potentiel d'exploitation.
+
+\paragraph{Solutions adoptées alors.} Des cartes mondiales de la couverture terrestre à 20-30$\:$m ont été produites au cours des deux dernières décennies (Europe, Chine, États-Unis), ainsi qu'une nouvelle version de l'European Corine Land Cover, en utilisant des images satellites. Cependant, elles présentaient une très faible précision à la fois en termes de résolution spatiale et de sémantique, et avec toujours un degré élevé d'intervention humaine. De tels produits LC ont été mis à disposition, souvent gratuitement, mais ils sont trop spécifiques (une seule échelle spatiale - grossière -  et un seul ensemble de classes - génériques).\\
+L'adaptation des données aux besoins spécifiques (échelle spatiale, ensemble de classes) était un sujet de recherche important, à la fois pour mieux alimenter les modèles environnementaux existants et pour développer de nouveaux services adaptés aux besoins. Des efforts récents en télédétection avaient été consacrés à l'utilisation conjointe des informations spatiales et spectrales et à la gestion du grand nombre de caractéristiques multimodales avec un nombre limité d'échantillons d'apprentissage
+d'entraînement. Si la communauté scientifique avait obtenu des résultats  importants, la plupart de ces méthodes ne s'adaptaient pas bien au grand volume de pixels à traiter dans le cadre d'un scénario à l'échelle nationale. En conséquence, les méthodes conventionnelles d'OCS et les avancées récentes dans les méthodes d'apprentissage n'étaient pas adaptées aux nouveaux défis : plus de données, plus d'hétérogénéité, mise à jour fréquente, amélioration spatiale, l'amélioration spatiale, l'extensibilité et l'automatisation.\\
+Un premier pas dans cette direction était le développement de la chaîne prototype $\iota^2$ (CESBIO). Cette chaîne est développée
+afin de générer des cartes de l'occupation du sol à l'échelle d'un pays à partir d'images de séries temporelles à haute résolution (à savoir les images Sentinel-2). Il était possible d'obtenir des cartes d'une résolution allant jusqu'à 10 mètres avec un ensemble de 15 à 20 classes. $\iota^2$ offrait la possibilité d'intégrer des méthodes de l'état de l'art en classification supervisée et en extraction d'informations à partir d'une base de données topographique existante imparfaite. $\iota^2$ était actuellement mis en œuvre dans le \href{https://www.theia-land.fr/pole-theia-2/}{pôle de données Théia}, mais nécessitait encore d'importants efforts de recherche pour gagner en précision et en flexibilité.
 
 \subsection{Approche scientifique et technique}
+\label{subsec:wp}
+L'ambition du projet MAESTRIA reposait sur des innovations méthodologiques liées à l'exploitation de grandes quantités de données d'observation de la Terre pour la génération de cartes de l'occupation du sol qui répondent au mieux aux exigences des utilisateurs finaux.
+En termes de méthodes, la fusion de données par l'extraction et la représentation de caractéristiques, l'apprentissage et la classification à large échelle sur des données bruitées, ainsi que l'analyse multi-échelles, sont des challenges interdépendants lorsqu'il s'agit de traiter des images de résolution spatiale et de nature physique différentes. Une répartition en trois tâches principales permettait la projection méthodologique la plus fluide.\\
+\textbf{1. Fusion d'informations hétérogènes.} Nous visions une coopération fructueuse entre toutes les sources de données tout en limitant la quantité d'informations nécessaire pour générer une carte cohérente de l'occupation du sol en temps voulu. Ceci est particulièrement bénéfique
+pour les méthodes d'apprentissage à grande échelle que nous mettrons en place.\\
+\textbf{2. Procédures d'apprentissage efficaces} permettant de modéliser correctement les classes d'intérêt sur de grandes échelles spatiales. Aujourd'hui, les données d'apprentissage sont extraites de cartes LC bruitées existantes ou de travaux intensifs sur le terrain. En outre, les données d'observation de la Terre sont elles-mêmes bruitées en raison de la présence de nuages ou d'ombres, ce qui entraîne des valeurs de pixels aberrantes. MAESTRIA cherchait à développer des classificateurs efficaces
+pouvant (i) fournir des cartes d'occupation du sol de qualité homogène pour toutes les régions de France, (ii) traiter les classes sous-représentées, (iii) les classes dont les signatures temporelles et spectrales sont très fluctuantes et (iv) traiter des échantillons d'apprentissage bruyants et des caractéristiques multimodales bruitées. Les étapes de fusion et d'apprentissage
+pouvaient être abordées séparément puis conjointement : nous avions décidé  que la tâche d'apprentissage intégrerait d'abord les caractéristiques $\iota^2$ existantes et exploiterait ensuite celles nouvellement générées.\\
+\textbf{3. Dérivation de résultats de classification alternatifs}. Les questions interdépendantes de segmentation et de classification devaient être abordées de manière à définir des modèles significatifs en termes de sémantique, à différentes échelles spatiales et temporelles, reliant la carte nationale générique de la couverture du sol aux exigences des utilisateurs finaux. Les représentations multiples et la flexibilité en termes d'étiquetage sémantique devaient être fournies par les deux tâches susmentionnées.\\
+
+Nos innovations méthodologiques méthodologiques devaient être directement appliquées à des cas réels. Les images d'observation de la Terre sont disponibles gratuitement, principalement par l'intermédiaire du \href{https://www.theia-land.fr/pole-theia-2/}{pôle de données Théia}. Tous les partenaires disposaient de fortes capacités
+de calcul avec l'existence de plusieurs clusters informatiques à Paris et à Toulouse (ISC-PIF, GENCI et CNES). MAESTRIA bénéficiait par ailleurs des résultats méthodologiques de quatre doctorants qui finalisaient leurs études dans les 2 laboratoires. groupes. La mise en place de trois ateliers d'utilisateurs finaux au cours du projet devait assurer un couplage plus étroit avec les utilisateurs finaux et une diffusion rapide.\\
+
+L'interaction entre les différentes tâches (workpackages, WP) est illustrée avec la figure~\ref{fig:illustration-generale}.
+
 
 \subsection{Résultats obtenus}
 \ANRinfo{Positionner les résultats par rapport aux livrables du projet et aux publications, brevets etc. Revisiter l’état de l’art et les enjeux à la fin du projet.}
 
-\jordi{Où est-ce qu’on parle de l’arrêt de la thèse de Rim ?}
-\mathieu{Où est-ce qu’on l'on parle (si l'on en parle) de l'arrêt maladie d'Erwan de 4 mois}
-
 Exemple de citation pour test biblio \citep{Luc_RS}, \citep{Luc_IGARSS22}, \citep{Luc_IGARSS21} \citep{isprs-archives-XLIII-B2-2020-703-2020} \citep{Stocker_ISPRS20} \citep{Hermann_ISPRS22} \citep{Nico_RSL} \citep{GIRYFOUQUET2021320}
+
+\paragraph{Préambule.}
+Les trois sous-sections suivantes correspondent aux travaux réalisés pour les trois tâches mentionnées en Section~\ref{subsec:wp}. Ces travaux devaient être supportés principalement par trois doctorant\textperiodcentered e\textperiodcentered s. La thèse realtive au WP1 a été arrêtée avant le mi-parcours alors que la thèse relative au WP2 n'a pu être menée jusqu'au bout, obérant ainsi les réalisations méthologiques escomptées.
+
 
 \subsubsection{MMDC - Multi Modal Data Cube}
 Les travaux du WP1 ont été organisés autour de 3 axes : le développement de l’architecture du modèle MMDC, la préparation de jeux de données de pré-entraînement et l’intégration du pipeline d’inférence dans la chaîne $\iota^2$.
-\begin{figure}
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=\columnwidth]{img/wp1/mmdc5.png}
 \caption{Illustration des données produites par le modèle MMDC. En colonnes, de gauche à droite, image Sentinel-1 ascendante, image Sentinel-1 descentante, image Sentinel-2 (RVB) et image Sentinel-2 (IR). En lignes, de haut en bas, données originales, réconstructions directes, reconstructions latentes, espace latent Sentinel-1 et espace latent Sentinel-2.}
@@ -35,7 +65,7 @@ Les travaux du WP1 ont été organisés autour de 3 axes : le développement de
 \end{center}
 \end{figure}
 
-\paragraph{Architecture du modèle}
+\paragraph{Architecture du modèle.}
 Le modèle MMDC retenu est un auto-encodeur variationnel multi-modal, similaire à la méthode de cross-génération de \cite{shi-2019-variat-mixtur}. Un encodeur par modalité est utilisé afin d’engendrer un espace latent gaussien. Un décodeur par modalité est aussi utilisé por réconstruire les données d’entrée. Les décodeurs peuvent être des réseaux de neurones ou des modèles physiques sans entrainement. Dans ce dernier cas, l’espace latent représente les variables d’entrée des modèles physiques. Dans le cas où les décodeurs sont des réseaux de neurones, l’espace latent n’a pas d’interprétation. Une illustration de ce dernier cas est donnée sur la figure \ref{fig:mmdcresults}.
 
 L’entraînement du modèle se fait par optimisation d’une fonction de coût composée de 5 termes :
@@ -51,12 +81,12 @@ Il est intéressant de noter la donnée S1 est composée des orbites ascendante 
 
 Les données satellite sont constituées des mesures (bandes spectrales optiques et polarisations SAR), mais aussi des informations de géométrie d’acquisition (angles capteur et solaires en optique et angle d’incidence locale en SAR). Ces données sont complétées par des informations de topographie (altitude, pente et aspect issus du modèle numérique de terrain SRTM) et des variables climatiques de la base de données Worldclim2 \cite{fick17_world}.
 
-\paragraph{Préparation de jeux de données multimodaux de pré-entraînement}
+\paragraph{Préparation de jeux de données multimodaux de pré-entraînement.}
 
 L’entraînement de modèles de fondation du type MMDC nécessite des gros volumes de données. Nous avons constitué un jeu de données dont le volume dépasse les 2TB. Il est composé de toutes les données disponibles sur l’année 2018 pour les capteurs Sentinel-1 et Sentinel-2 sur 50 tuiles de la grille MGRS sélectionnées de façon aléatoire sur l’ensemble des surfaces continentales de façon à couvrir des zones climatiques et des paysages différents. Elles sont illustrées sur la figure \ref{fig:mmdctiles}. Sur chacune de ces tuiles, 5 régions d’intérêt (ROI) de 1024 $\times$ 1024 pixels (à 10$\:$m. de résolution spatiale) sont découpées de façon aléatoire. Toute la profondeur temporelle est conservée. Chaque ROI est accompagnée des 103 variables climatiques Worldclim2 et du Modèle Numérique de Terrain (MNT) SRTM. Le code source utilisé pour la constitution du jeu de données est disponible \href{https://src.koda.cnrs.fr/mmdc/mmdc-datacollection}{en ligne}.
 
 
-\begin{figure}
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=\columnwidth]{img/wp1/tiles.pdf}
 \caption{Localisation des 50 tuiles MGRS sélectionnées pour le jeu de données MMDC.}
@@ -66,14 +96,14 @@ L’entraînement de modèles de fondation du type MMDC nécessite des gros volu
 
 Au delà des travaux prévus dans MAESTRIA, ces données ont pu être valorisées dans \citep{dumeur-2023-self-satel}.
 
-\paragraph{Code source}
+\paragraph{Code source.}
 L’ensemble du code dévelopé dans le cadre du WP1 est disponible en ligne sur \href{https://src.koda.cnrs.fr/mmdc}{Koda CNRS} . Nous avons utilisé la bibliothèque \href{https://pytorch.org/}{Pytorch} pour la mise en œuvre des modèles de réseaux de neurones, l’orchestration des apprentissages a été faite avec la bibliothèque \href{https://lightning.ai/}{Pytorch Lightning} et toutes les expériences ont été configurées et paramétrées avec la bibliothèque \href{https://hydra.cc/}{Hydra}.
 
 Le code a été décomposé en plusieurs dépôts, dont \href{https://src.koda.cnrs.fr/mmdc/mmdc-singledate}{le principal} contient les modèles de réseaux de neurones.
 
 Nous avons aussi réalisé le portage en Pytorch du modèle de transfert radiatif PROSAIL \cite{jacquemoud-2009-prosp-sail-model} à partir de sa version Numpy \cite{domenzain19}. Ceci a été nécessaire pour pouvoir insérer le modèle physique dans les modèles d’apprentissage profond. En effet, pour réaliser l’apprentissage de bout en bout, il est nécessaire de rétro-propager les gradients des fonctions de coût à travers toutes les opérations du modèle (encodeurs et décodeurs). Dans le cas de l’apprentissage avec a priori physiques, le décodeur est remplacé par le modèle physique, qui doit être différentiable et capable de propager les gradients.
 
-\paragraph{Intégration dans $\iota^2$}
+\paragraph{Intégration dans $\iota^2$.}
 Afin de pouvoir déployer les modèles MMDC sur de grandes étendues, MAESTRIA a proposé de faire des évolutions à la chaîne $\iota^2$ développée initialement par le CESBIO. L’idée principale a était d’utiliser les encodeurs MMDC comme extracteurs de primitives qui pourraient être insérés dans le workflow $\iota^2$ (extraction de primitives, apprentissage, inférence). $\iota^2$ étant un projet existant avec des pratiques de développement ouvertes \href{https://framagit.org/iota2-project/iota2}{sur une forge publique}, les développements nécessaires à MAESTRIA ont été découpés en tickets spécifiques :
 \begin{itemize}
 \item création de data-loaders pour entraîner des modèles de réseaux de neurones dans $\iota^2$ (\href{https://framagit.org/iota2-project/iota2/-/issues/194}{ticket 194});
@@ -126,7 +156,7 @@ où \(f_\ell(\mathbf{R}_\ell)  = -\ln(\boldsymbol{\beta}_\ell^\top\mathbf{R}_\el
                       \end{array}
                                   \right.                                  \label{eq:simplex}
 \end{eqnarray}
-Cette formulation permet d'appliquer l'algorithme ADMM~\cite[Chapter~7]{boyd-2010-distr-optim}. Dans cadre, le Lagrangien augmenté s'écrit
+Cette formulation permet d'appliquer l'algorithme ADMM~\cite[Chapter~7]{boyd-2010-distr-optim}. Dans cadre, le Lagrangien augmenté s'écrit:
 \begin{multline}
   \mathcal{L}_{\rho}(\mathbf{R}_1,\ldots,\mathbf{R}_n,\ \mathbf{Z},\mathbf{Y}_1,\ldots,\mathbf{Y}_n) = \\ \sum_{\ell=1}^{n} \Bigg(f_{\ell}(\mathbf{R}_\ell) + \langle\mathbf{Y}_\ell, \mathbf{R}_\ell - \mathbf{Z}\rangle_F + \frac{\rho}{2}\|\mathbf{R}_\ell - \mathbf{Z}\|^2_F\Bigg) + g(\mathbf{Z}),
   \label{eq:consensus:lagrangian}  
@@ -152,6 +182,12 @@ Pour pallier à cette faiblesse, nous avons avons utilisé la dérivabilité de 
 \subsubsection{Dérivation de produits adaptés à des utilisateurs finaux}
 
 \clement{Au boulot !!}
+
+WP3 benefits from the methodological outputs of WP1/2 in two directions: (i) exploiting the flexibility
+and classification performance achieved beforehand to propose methods for automatic land-cover map
+derivation at different spatial scales and for (potentially) new sets of classes; (ii) implementing all techniques
+in a common open-source framework and proposing products adapted to various end-users.
+
 
 \subsection{Exploitation des résultats}
 
