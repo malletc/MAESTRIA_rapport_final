@@ -56,6 +56,7 @@ Les trois sous-sections suivantes correspondent aux travaux réalisés pour les 
 
 
 \subsubsection{MMDC - Multi Modal Data Cube}
+\label{subsec:mmdc}
 Les travaux du WP1 ont été organisés autour de 3 axes : le développement de l’architecture du modèle MMDC, la préparation de jeux de données de pré-entraînement et l’intégration du pipeline d’inférence dans la chaîne $\iota^2$.
 \begin{figure}[htbp]
 \begin{center}
@@ -97,7 +98,7 @@ L’entraînement de modèles de fondation du type MMDC nécessite des gros volu
 Au delà des travaux prévus dans MAESTRIA, ces données ont pu être valorisées dans \citep{dumeur-2023-self-satel}.
 
 \paragraph{Code source.}
-L’ensemble du code dévelopé dans le cadre du WP1 est disponible en ligne sur \href{https://src.koda.cnrs.fr/mmdc}{Koda CNRS} . Nous avons utilisé la bibliothèque \href{https://pytorch.org/}{Pytorch} pour la mise en œuvre des modèles de réseaux de neurones, l’orchestration des apprentissages a été faite avec la bibliothèque \href{https://lightning.ai/}{Pytorch Lightning} et toutes les expériences ont été configurées et paramétrées avec la bibliothèque \href{https://hydra.cc/}{Hydra}.
+L’ensemble du code dévelopé dans le cadre du WP1 est disponible en ligne sur \href{https://src.koda.cnrs.fr/mmdc}{Koda CNRS}. Nous avons utilisé la bibliothèque \href{https://pytorch.org/}{Pytorch} pour la mise en œuvre des modèles de réseaux de neurones, l’orchestration des apprentissages a été faite avec la bibliothèque \href{https://lightning.ai/}{Pytorch Lightning} et toutes les expériences ont été configurées et paramétrées avec la bibliothèque \href{https://hydra.cc/}{Hydra}.
 
 Le code a été décomposé en plusieurs dépôts, dont \href{https://src.koda.cnrs.fr/mmdc/mmdc-singledate}{le principal} contient les modèles de réseaux de neurones.
 
@@ -223,7 +224,7 @@ Les codes et jeux de données (France entière, six cartes d'occupation du sol, 
 
 
 \subsection{Exploitation des résultats}
-Les travaux menés sur la fusion de données (WP1) sont couplés avec les avancées méthodologiques du projet ANR en cours \href{https://anr.hal.science/search/index/?q=*&anrProjectReference_s=ANR-20-CE23-0003}{DeepChange} (ANR-20-CE23-0003). Ce dernier a débuté 2 ans plus tard et bénéficie donc des réflexions et travaux préliminaires menés dans le cadre de MAESTRIA, tout comme la chaîne $\iota^2$ a bénéficié d'un certain nombre de fonctionnalités nécessaires au déploiement des modèles MMDC. En conséquence, avec une forge ouverte, ces résultats sont à la disposition des communautés scientifiques ainsi que des industriels travaillant également sur l'exploitation des images d'observation de la Terre.\\
+Les travaux menés sur la fusion de données (WP1) sont couplés avec les avancées méthodologiques du projet ANR en cours \href{https://anr.hal.science/search/index/?q=*&anrProjectReference_s=ANR-20-CE23-0003}{DeepChange} (ANR-20-CE23-0003). Ce dernier a débuté 2 ans plus tard et bénéficie donc des réflexions et travaux préliminaires menés dans le cadre de MAESTRIA, tout comme la chaîne $\iota^2$ a bénéficié d'un certain nombre de fonctionnalités nécessaires au déploiement des modèles MMDC \cite{zerah-2023-physic-driven}. En conséquence, avec une forge ouverte, ces résultats sont à la disposition des communautés scientifiques ainsi que des industriels travaillant également sur l'exploitation des images d'observation de la Terre.\\
 Les mêmes conclusions s'appliquent aux travaux des WP2 et WP3. Les développements du WP3 pourraient être repris par le Service d'Innovation de l'Institut National de l'Information Géographique et Forestière (IGN), une des tutelles du LASTIG, afin de générer automatiquement des OCS à différentes échelles spatiales à partir d'une OCS pixellaire à 0,2$\:$m de résolution obtenue automatiquement par apprentissage profond \cite{garioud2023flair}, \cite{garioud2023flair2}.
 
 
